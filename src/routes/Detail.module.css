@@ -1,0 +1,68 @@
+.loading {
+    padding: 40px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.backBtn {
+    padding: 14px;
+    background-color: white;
+    border: 1px solid #dcdcdc;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    color: #494949;
+}
+
+.backBtn:hover {
+    color: white;
+    background-color: #7a7af8;
+}
+
+body {
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 40px;
+    background-color: #f3f3f3;
+    border-radius: 14px;
+}
+
+.rocketCard {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.content {
+    padding: 20px;
+}
+
+.name {
+    margin-bottom: 12px;
+    font-weight: 800;
+}
+
+.meta {
+    margin-bottom: 12px;
+}
+
+.description {
+    font-size: 16px;
+}
+
