@@ -1,5 +1,15 @@
 import { useEffect, useState } from "react";
-export type RocketType = {flickr_images: string[]; name: string; active: boolean; cost_per_launch: number; country: string; description: string; id: string};
+import styles from "./Home.module.css";
+import RocketCard from "../components/RocketCard.tsx";
+export type RocketType = {
+    flickr_images: string[];
+    name: string;
+    active: boolean;
+    cost_per_launch: number;
+    country: string;
+    description: string;
+    id: string;
+};
 
 function Home() {
     const [loading, setLoading] = useState(true);
@@ -7,7 +17,7 @@ function Home() {
     useEffect(() => {
         fetch("https://api.spacexdata.com/v4/rockets")
             .then(res => res.json())
-            .then((json : RocketType[]) => {
+            .then((json: RocketType[]) => {
                 setRockets(json);
                 setLoading(false);
             })
@@ -15,9 +25,28 @@ function Home() {
                 console.log(err);
                 setLoading(false);
             });
-    }, [])
+    }, []);
 
-    return <></>
+    return (
+        <div className={styles.container}>
+            <header className={styles.header}>
+                <h1 className={styles.title}>SpaceX Archive</h1>
+            </header>
+            <main className={styles.content}>
+                {loading ? (
+                    <div className={styles.loading}>SCANNING FOR ROCKET...</div>
+                ) : (
+                    <div className={styles.flexContainer}>
+                        {rockets.map((value, index) => (
+                            <div key={index} className={styles.flexItem}>
+                                <RocketCard rocket={value}/>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </main>
+        </div>
+    );
 }
 
 export default Home;
