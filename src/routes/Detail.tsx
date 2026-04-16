@@ -1,15 +1,15 @@
-import { useNavigate, useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import type { Rocket } from "./Home.tsx";
 import styles from "./Detail.module.css";
 
 function Detail() {
     const { id } = useParams();
-    const navigate = useNavigate();
     const [loading, setLoading] = useState<boolean>(true);
     const [rocket, setRocket] = useState<Rocket | null>(null);
 
     useEffect(() => {
+        if (!id) return;
         fetch(`https://api.spacexdata.com/v4/rockets/${id}`)
             .then(res => res.json())
             .then((json: Rocket) => {
@@ -23,25 +23,56 @@ function Detail() {
     }, [id]);
 
     if (loading) {
-        return <div className={styles.loading}>Loading...</div>;
+        return <div className={styles.loading}>접속 중...</div>;
     }
+
     if (!rocket) {
-        return <div className={styles.loading}>데이터를 불러오는데 실패 하였습니다.</div>;
+        return <div className={styles.loading}>로켓 정보를 찾을 수 없습니다.</div>
     }
+
     return (
         <div className={styles.container}>
-            <button className={styles.backBtn} onClick={() => {navigate(-1)}}>뒤로 가기</button>
-            <div className={styles.rocketCard}>
-                <img className={styles.image} src={rocket.flickr_images[0]} alt={"rocket"} />
-                <div className={styles.content}>
-                    <h1 className={styles.name}>{rocket.name}</h1>
-                    <div className={styles.meta}>
-                        <h5>{rocket.first_flight}</h5>
-                        <h5>{rocket.country}</h5>
+            <Link to={"/"} className={styles.backLink}>
+                목록으로 돌아가기
+            </Link>
+            <article className={styles.article}>
+                {rocket.flickr_images[0] && (
+                    <div className={styles.imageWrapper}>
+                        <img
+                            className={styles.rocketImage}
+                            src={rocket.flickr_images[0]}
+                            alt={rocket.name}
+                        />
                     </div>
-                    <h6 className={styles.description}>{rocket.description}</h6>
+                )}
+
+                <div className={styles.info}>
+                    {/* h1은 block요소라, background가 width: 100%로 적용 중
+                    그래서, 그 안에 span으로 inline을 주고, style을 적용*/}
+                    <h1>
+                        <span className={styles.name}>{rocket.name}</span>
+                    </h1>
+                    <p className={styles.description}>{rocket.description}</p>
+                    <div className={styles.specs}>
+                        <div className={styles.specItem}>
+                            <span className={styles.label}>발사 비용</span>
+                            <span className={styles.value}>
+                                $ {rocket.cost_per_launch.toLocaleString()}
+                            </span>
+                        </div>
+                        <div className={styles.specItem}>
+                            <span className={styles.label}>제조 국가</span>
+                            <span className={styles.value}>{rocket.country}</span>
+                        </div>
+                        <div className={styles.specItem}>
+                            <span className={styles.label}>상태</span>
+                            <span className={styles.value} style={{color: rocket.active ? "#10b981" : "#ef4444"}}>
+                                {rocket.active ? "운용 중" : "비운용"}
+                            </span>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </article>
         </div>
     );
 }
