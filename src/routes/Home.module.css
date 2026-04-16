@@ -1,7 +1,7 @@
 .container {
-    min-height: 100dvh;
-    background-color: #0b0e14;
+    min-width: 100dvh;
     color: #f9fafc;
+    background-color: #0b0e14;
 }
 
 .header {
@@ -11,16 +11,15 @@
 }
 
 .title {
-    margin: 0;
-    font-size: 3rem;
     font-weight: 900;
+    font-size: 3rem;
 }
 
 .content {
-    padding: 48px 24px;
     width: 100%;
     max-width: 1240px;
     margin: 0 auto;
+    padding: 48px 24px;
 }
 
 .loading {
@@ -29,14 +28,14 @@
     color: #64748b;
 }
 
-.flexContainer {
+.flexWrapper {
     margin-top: 50px;
     display: flex;
-    gap: 30px;
     flex-wrap: wrap;
+    gap: 30px;
 }
 
 .flexItem {
-    width: calc((100% - 60px) / 3);
+    width: calc((100% - 60px)/3);
 }
 

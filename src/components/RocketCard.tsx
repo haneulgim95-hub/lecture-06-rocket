@@ -1,12 +1,14 @@
 import type { RocketType } from "../routes/Home.tsx";
-import styles from "./RocketCard.module.css";
 import { Link } from "react-router";
+import styles from "./RocketCard.module.css";
 
 function RocketCard({ rocket }: { rocket: RocketType }) {
     return (
-        <Link to={`/${rocket.id}`} className={styles.card}>
-            <h3 className={styles.name}>{rocket.name}</h3>
-            <div className={styles.country}>{rocket.country}</div>
+        <Link className={styles.card} to={`/${rocket.id}`}>
+            <h1 className={styles.name}>{rocket.name}</h1>
+            <div>
+                <span className={styles.country}>{rocket.country}</span>
+            </div>
         </Link>
     );
 }
