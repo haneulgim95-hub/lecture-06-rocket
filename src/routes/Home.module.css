@@ -1,9 +1,40 @@
 .container {
     min-height: 100dvh;
+    background-color: #0b0e14;
+    color: #f9fafc;
 }
 
 .header {
     padding: 80px 24px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     background: linear-gradient(135deg, #ef4444 0%, #3b82f6 100%);
+}
+
+.title {
+    font-weight: 900;
+    font-size: 3rem;
+}
+
+.content {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 48px 24px;
+}
+
+.loading {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #64748b;
+}
+
+.flexWrapper {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.flexItem {
+    width: calc((100% - 60px) / 3);
 }
